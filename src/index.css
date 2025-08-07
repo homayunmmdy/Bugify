@@ -104,14 +104,12 @@
     -webkit-box-shadow: 0 0 0 1px hsl(var(--accent));
     box-shadow: 0 0 0 1px hsl(var(--accent));
   }
-  
+
   img,
   picture {
     max-inline-size: 100%;
     display: block;
   }
-
-
 
   li::marker {
     content: none;
@@ -316,6 +314,22 @@
 }
 
 @layer utilities {
+  .accent {
+    color: hsl(var(--accent));
+  }
+  .expense-inputs {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    gap: var(--space-md);
+  }
+
+  @media screen and (max-width: 725px) {
+    .expense-inputs {
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+    }
+  }
 }
 
 body {

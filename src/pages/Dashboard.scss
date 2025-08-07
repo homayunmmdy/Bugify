@@ -1,0 +1,36 @@
+.dashboard {
+  display: -ms-grid;
+  display: grid;
+  gap: var(--space-lg);
+  place-items: start;
+  width: 100%;
+}
+
+.form-wrapper {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 48%;
+  flex: 1 1 48%;
+  max-width: 800px;
+  position: relative;
+  display: -ms-grid;
+  display: grid;
+  gap: var(--space-sm);
+  background-color: var(--bkg);
+  padding: var(--space-xl);
+  border-radius: var(--round-lg);
+  -webkit-box-shadow: 0.25em 0.3em 1em hsl(var(--muted) / 0.2);
+  box-shadow: 0.25em 0.3em 1em hsl(var(--muted) / 0.2);
+  border-top: 0.15em solid white;
+  border-left: 0.15em solid white;
+  border-right: 0.15em solid hsl(var(--bkg));
+  border-bottom: 0.15em solid hsl(var(--bkg));
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0.55rem;
+    border: 2px dashed hsl(var(--text));
+    border-radius: calc(var(--round-lg) * 0.6);
+    z-index: -1;
+  }
+}

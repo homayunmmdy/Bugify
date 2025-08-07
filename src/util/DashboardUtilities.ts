@@ -1,5 +1,5 @@
 import toast from "react-hot-toast";
-import { fetchData, wait } from "../helper";
+import { createBudget, fetchData, wait } from "../helper";
 
 // loader
 export function dashboardLoader() {
@@ -21,6 +21,18 @@ export async function dashboardAction({ request }: { request: Request }) {
     } catch (error: unknown) {
       console.error(error);
       throw new Error("There was a problem creating your account.");
+    }
+  }
+
+    if (_action === "createBudget") {
+    try {
+      createBudget({
+        name: values.newBudget,
+        amount: values.newBudgetAmount,
+      });
+      return toast.success("Budget created!");
+    } catch (e) {
+      throw new Error("There was a problem creating your budget.");
     }
   }
 }

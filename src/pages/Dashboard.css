@@ -1,0 +1,6 @@
+.dashboard {
+  display: grid;
+  gap: var(--space-lg);
+  place-items: start;
+  width: 100%;
+}/*# sourceMappingURL=Dashboard.css.map */
