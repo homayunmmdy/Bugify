@@ -1,0 +1,21 @@
+.layout {
+  display: -ms-grid;
+  display: grid;
+  min-height: 100vh;
+  -ms-grid-rows: auto 1fr auto;
+  grid-template-rows: auto 1fr auto;
+
+  img {
+    width: 100%;
+  }
+
+  main {
+    max-width: 1500px;
+    width: 100%;
+    padding: var(--space-md) var(--space-md) var(--space-xl);
+    margin-inline: auto;
+    display: -ms-grid;
+    display: grid;
+    place-items: start;
+  }
+}
