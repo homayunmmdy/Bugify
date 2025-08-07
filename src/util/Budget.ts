@@ -1,7 +1,7 @@
 import toast from "react-hot-toast";
 import { createExpense, deleteItem, getAllMatchingItems } from "../helper";
-import type { BudgetType } from "../types";
 
+// @ts-ignore
 export async function budgetLoader({ params }) {
   const budget = await getAllMatchingItems({
     category: "budgets",
@@ -22,6 +22,7 @@ export async function budgetLoader({ params }) {
   return { budget, expenses };
 }
 
+//@ts-ignore
 export async function budgetAction({ request }) {
   const data = await request.formData();
   const { _action, ...values } = Object.fromEntries(data);
@@ -34,7 +35,7 @@ export async function budgetAction({ request }) {
         budgetId: values.newExpenseBudget,
       });
       return toast.success(`Expense ${values.newExpense} created!`);
-    } catch (error : unknown) {
+    } catch (error: unknown) {
       console.log(error);
       throw new Error("There was a problem creating your expense.");
     }

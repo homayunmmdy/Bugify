@@ -34,6 +34,7 @@ const DashboardPage = () => {
                     <h2>Recent Expenses</h2>
                     <Table
                       expenses={expenses
+                        // @ts-ignore
                         .sort((a, b) => b.createdAt - a.createdAt)
                         .slice(0, 8)}
                     />

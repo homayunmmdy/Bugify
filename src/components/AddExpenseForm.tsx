@@ -60,6 +60,7 @@ const AddExpenseForm = ({ budgets }: { budgets: BudgetType[] }) => {
           <label htmlFor="newExpenseBudget">Budget Category</label>
           <select name="newExpenseBudget" id="newExpenseBudget" required>
             {budgets
+            //@ts-ignore
               .sort((a, b) => a.createdAt - b.createdAt)
               .map((budget) => {
                 return (

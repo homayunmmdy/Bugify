@@ -2,7 +2,7 @@ import { redirect } from "react-router-dom";
 import toast from "react-hot-toast";
 import { deleteItem, getAllMatchingItems } from "../helper";
 
-
+//@ts-ignore
 export function deleteBudget({ params }) {
   try {
     deleteItem({

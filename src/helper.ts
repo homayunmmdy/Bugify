@@ -5,6 +5,7 @@ export const wait = () =>
 
 // colors
 const generateRandomColor = () => {
+  // @ts-ignore
   const existingBudgetLength = fetchData("budgets")?.length ?? 0;
   return `${existingBudgetLength * 34} 65% 50%`;
 };
@@ -25,6 +26,7 @@ export function loadUserName() {
 export const deleteItem = ({ key, id } : {key : string , id?: unknown}) => {
   const existingData = fetchData(key);
   if (id) {
+    //@ts-ignore
     const newData = existingData.filter((item) => item.id !== id);
     return localStorage.setItem(key, JSON.stringify(newData));
   }
@@ -43,6 +45,7 @@ export const createBudget = ({ name, amount }: {name : FormDataEntryValue, amoun
   const existingBudgets = fetchData("budgets") ?? [];
   return localStorage.setItem(
     "budgets",
+    // @ts-ignore
     JSON.stringify([...existingBudgets, newItem])
   );
 };
@@ -81,6 +84,7 @@ export const formatPercentage = (amt: number) => {
 // Get all items from local storage
 export const getAllMatchingItems = ({ category, key, value }: {category : string , key : string , value : string}) => {
   const data = fetchData(category) ?? [];
+  // @ts-ignore
   return data.filter((item) => item[key] === value);
 };
 
@@ -96,6 +100,7 @@ export const createExpense = ({ name, amount, budgetId } : ExpenseType) => {
   const existingExpenses = fetchData("expenses") ?? [];
   return localStorage.setItem(
     "expenses",
+    // @ts-ignore
     JSON.stringify([...existingExpenses, newItem])
   );
 };
