@@ -1,93 +1,69 @@
-# Bugify
+# React + TypeScript + Vite
 
-**Bugify** is a web application designed to help users manage their finances, track expenses, and create budgets. The application is built using React, offering a user-friendly interface for all your money management needs.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
+Currently, two official plugins are available:
 
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-https://github.com/user-attachments/assets/ffadf2a8-f5b7-420f-b3db-766a62646d02
+## Expanding the ESLint configuration
 
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
+```js
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-## Features
+      // Remove tseslint.configs.recommended and replace with this
+      ...tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      ...tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      ...tseslint.configs.stylisticTypeChecked,
 
-- **Expense Tracking:** Easily log and categorize your expenses.
-- **Budget Management:** Create and manage multiple budgets.
-- **Financial Overview:** Get a detailed view of your spending habits and savings.
-- **Responsive Design:** The application is fully responsive and works seamlessly on all devices.
-- **User Authentication:** Secure login and registration for personalized financial management.
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
 
-## Installation
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-### Prerequisites
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-- Node.js (version 14.x or later)
-- npm or yarn
-
-### Steps
-
-1. **Clone the Repository:**
-
-   ```bash
-   git clone https://github.com/homayunmmdy/Bugify.git
-   cd Bugify
-   ```
-
-2. **Install Dependencies:**
-
-   Using npm:
-   ```bash
-   npm install
-   ```
-
-   Using yarn:
-   ```bash
-   yarn install
-   ```
-
-3. **Run the Application:**
-
-   Using npm:
-   ```bash
-   npm start
-   ```
-
-   Using yarn:
-   ```bash
-   yarn start
-   ```
-
-   The application will start on `http://localhost:3000`.
-
-## Usage
-
-1. **Create an Account:**
-   - Register for a new account or log in with your existing credentials.
-
-2. **Manage Expenses:**
-   - Add and categorize your expenses to keep track of where your money is going.
-   - View your spending patterns with visualizations and summaries.
-
-3. **Create Budgets:**
-   - Set up budgets for different categories (e.g., groceries, entertainment, etc.).
-   - Track your progress against your budget to ensure you stay on track.
-
-4. **Financial Overview:**
-   - Get a comprehensive overview of your finances, including total income, expenses, and savings.
-
-## Project Structure
-
-- **src/components** - Contains React components used throughout the application.
-- **src/pages** - Contains page components representing different views (e.g., dashboard, expenses, budgets).
-- **src/services** - Contains service files for API calls and utilities like date and currency formatting.
-- **src/styles** - Contains styling files.
-
-## Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository.
-2. Create a new branch: `git checkout -b feature/your-feature-name`.
-3. Make your changes.
-4. Commit your changes: `git commit -m 'Add some feature'`.
-5. Push to the branch: `git push origin feature/your-feature-name`.
-6. Open a pull request.
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
