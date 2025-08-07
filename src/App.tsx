@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainPage from "./layout/Main";
 import ErrorPage from "./pages/Error";
 import DashboardPage from "./pages/Dashboard";
-import { dashboardLoader } from "./util/DashboardUtilities";
+import { dashboardAction, dashboardLoader } from "./util/DashboardUtilities";
 
 const router = createBrowserRouter([
   {
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
         index: true,
         element: <DashboardPage />,
         loader: dashboardLoader,
-        // action: dashboardAction,
+        action: dashboardAction,
         errorElement: <ErrorPage />,
       },
     ]
