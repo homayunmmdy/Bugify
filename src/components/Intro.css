@@ -1,0 +1,23 @@
+.intro {
+  display: flex;
+  flex-wrap: wrap;
+  align-self: center;
+  justify-self: center;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-lg);
+}
+.intro .mainGrid {
+  display: grid;
+  gap: var(--space-sm);
+  max-width: var(--content-sm);
+}
+.intro form {
+  display: grid;
+  gap: var(--space-sm);
+  max-width: 25ch;
+}
+.intro .illustration-img {
+  display: block;
+  max-width: 100%;
+}/*# sourceMappingURL=Intro.css.map */

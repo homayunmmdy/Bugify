@@ -1,0 +1,16 @@
+.layout {
+  display: grid;
+  min-height: 100vh;
+  grid-template-rows: auto 1fr auto;
+}
+.layout .wave-img {
+  width: 100%;
+}
+.layout main {
+  max-width: 1500px;
+  width: 100%;
+  padding: var(--space-md) var(--space-md) var(--space-xl);
+  margin-inline: auto;
+  display: grid;
+  place-items: start;
+}/*# sourceMappingURL=Main.css.map */

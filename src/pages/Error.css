@@ -1,0 +1,11 @@
+.error {
+  -ms-grid-row-align: center;
+  -ms-grid-column-align: center;
+  place-self: center;
+  display: grid;
+  place-items: center;
+  place-content: center;
+  gap: var(--space-lg);
+  padding-block: var(--space-lg);
+  text-align: center;
+}/*# sourceMappingURL=Error.css.map */

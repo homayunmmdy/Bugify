@@ -2,13 +2,23 @@ import { Toaster } from "react-hot-toast";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainPage from "./layout/Main";
 import ErrorPage from "./pages/Error";
+import DashboardPage from "./pages/Dashboard";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainPage />,
     // loader: mainLoader,
-    errorElement: <ErrorPage />
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true,
+        element: <DashboardPage />,
+        // loader: dashboardLoader,
+        // action: dashboardAction,
+        errorElement: <ErrorPage />,
+      },
+    ]
   },
 ]);
 

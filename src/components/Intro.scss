@@ -1,0 +1,38 @@
+.intro {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-item-align: center;
+  -ms-grid-row-align: center;
+  align-self: center;
+  -ms-grid-column-align: center;
+  justify-self: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  gap: var(--space-lg);
+
+  .mainGrid {
+    display: -ms-grid;
+    display: grid;
+    gap: var(--space-sm);
+    max-width: var(--content-sm);
+  }
+
+  form {
+    display: -ms-grid;
+    display: grid;
+    gap: var(--space-sm);
+    max-width: 25ch;
+  }
+
+  .illustration-img {
+    display: block;
+    max-width: 100%;
+  }
+}
