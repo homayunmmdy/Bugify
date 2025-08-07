@@ -144,6 +144,45 @@
     -webkit-transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
   }
 
+  .table {
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  tr:nth-child(odd) {
+    background-color: hsl(var(--accent) / 0.04);
+  }
+
+  td {
+    border: none;
+    font-size: var(--fs-200);
+  }
+
+  thead > tr:nth-child(odd) {
+    background-color: hsl(var(--bkg));
+  }
+
+  td,
+  th {
+    text-align: center;
+    padding: var(--space-xs);
+  }
+
+  table .btn {
+    margin-inline: auto;
+  }
+
+  table a {
+    text-decoration: none;
+    color: hsl(var(--bkg));
+    background-color: hsl(var(--accent));
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--round-full);
+  }
+
   :where(a, .btn) {
     --color: hsl(var(--text));
     --backdrop: hsl(var(--accent));

@@ -1,13 +1,14 @@
 import { Toaster } from "react-hot-toast";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { deleteBudget } from "./actions/deleteBudget";
 import { logoutAction } from "./actions/logout";
 import { loadUserName } from "./helper";
 import MainPage from "./layout/Main";
+import BudgetPage from "./pages/Budget";
 import DashboardPage from "./pages/Dashboard";
 import ErrorPage from "./pages/Error";
+import { budgetAction, budgetLoader } from "./util/Budget";
 import { dashboardAction, dashboardLoader } from "./util/Dashboard";
-import BudgetPage from "./pages/Budget";
-import { budgetLoader } from "./util/Budget";
 
 const router = createBrowserRouter([
   {
@@ -27,14 +28,14 @@ const router = createBrowserRouter([
         path: "budget/:id",
         element: <BudgetPage />,
         loader: budgetLoader,
-        // action: budgetAction,
+        action: budgetAction,
         errorElement: <ErrorPage />,
-        // children: [
-        //   {
-        //     path: "delete",
-        //     action: deleteBudget,
-        //   },
-        // ],
+        children: [
+          {
+            path: "delete",
+            action: deleteBudget,
+          },
+        ],
       },
       {
         path: "logout",
