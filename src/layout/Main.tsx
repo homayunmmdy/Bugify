@@ -1,11 +1,12 @@
 import "./Main.scss"
-import { Outlet } from "react-router-dom";
+import { Outlet, useLoaderData } from "react-router-dom";
 import Nav from "../components/Nav";
 
 const MainPage = () => {
+  const { userName } = useLoaderData()
   return (
     <div className="layout">
-      <Nav />
+      <Nav userName={userName}/>
       <main>
         <Outlet />
       </main>
