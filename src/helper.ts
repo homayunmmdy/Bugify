@@ -78,3 +78,9 @@ export const formatPercentage = (amt: number) => {
   });
 };
 
+// Get all items from local storage
+export const getAllMatchingItems = ({ category, key, value }: {category : string , key : string , value : string}) => {
+  const data = fetchData(category) ?? [];
+  return data.filter((item) => item[key] === value);
+};
+

@@ -5,7 +5,9 @@ import { loadUserName } from "./helper";
 import MainPage from "./layout/Main";
 import DashboardPage from "./pages/Dashboard";
 import ErrorPage from "./pages/Error";
-import { dashboardAction, dashboardLoader } from "./util/DashboardUtilities";
+import { dashboardAction, dashboardLoader } from "./util/Dashboard";
+import BudgetPage from "./pages/Budget";
+import { budgetLoader } from "./util/Budget";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +24,19 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
       },
       {
+        path: "budget/:id",
+        element: <BudgetPage />,
+        loader: budgetLoader,
+        // action: budgetAction,
+        errorElement: <ErrorPage />,
+        // children: [
+        //   {
+        //     path: "delete",
+        //     action: deleteBudget,
+        //   },
+        // ],
+      },
+      {
         path: "logout",
         action: logoutAction,
       },
@@ -36,8 +51,8 @@ function App() {
       <Toaster
         toastOptions={{
           style: {
-            fontSize: "15px", 
-            fontWeight: 'normal'
+            fontSize: "15px",
+            fontWeight: "normal",
           },
         }}
       />

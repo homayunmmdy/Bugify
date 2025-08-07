@@ -10,7 +10,7 @@ const MainPage = () => {
       <main>
         <Outlet />
       </main>
-      <img className="wave-img" src="wave.svg" alt="Image of wave" />
+      <img className="wave-img" src="/wave.svg" alt="Image of wave" />
     </div>
   );
 };
