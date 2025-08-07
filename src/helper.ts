@@ -1,3 +1,5 @@
+import type { BudgetType } from "./types";
+
 export const wait = () =>
   new Promise((res) => setTimeout(res, Math.random() * 800));
 
@@ -44,3 +46,35 @@ export const createBudget = ({ name, amount }: {name : FormDataEntryValue, amoun
     JSON.stringify([...existingBudgets, newItem])
   );
 };
+
+
+
+// total spent by budget
+export const calculateSpentByBudget = (budgetId: string) => {
+  const expenses: BudgetType[] = fetchData("expenses") ?? [];
+  const budgetSpent = expenses.reduce((acc : number, expense: BudgetType) => {
+    // check if expense.id === budgetId I passed in
+    if (expense.budgetId !== budgetId) return acc;
+
+    // add the current amount to my total
+    return (acc += expense.amount);
+  }, 0);
+  return budgetSpent;
+};
+
+// Format currency
+export const formatCurrency = (amt: number) => {
+  return amt.toLocaleString(undefined, {
+    style: "currency",
+    currency: "USD",
+  });
+};
+
+// Formating percentages
+export const formatPercentage = (amt: number) => {
+  return amt.toLocaleString(undefined, {
+    style: "percent",
+    minimumFractionDigits: 0,
+  });
+};
+

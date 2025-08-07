@@ -4,7 +4,9 @@ import { createBudget, fetchData, wait } from "../helper";
 // loader
 export function dashboardLoader() {
   const userName = fetchData("userName");
-  return { userName };
+  const budgets = fetchData("budgets");
+  const expenses = fetchData("expenses");
+  return { userName, budgets, expenses };
 }
 
 export async function dashboardAction({ request }: { request: Request }) {
@@ -24,14 +26,15 @@ export async function dashboardAction({ request }: { request: Request }) {
     }
   }
 
-    if (_action === "createBudget") {
+  if (_action === "createBudget") {
     try {
       createBudget({
         name: values.newBudget,
         amount: values.newBudgetAmount,
       });
       return toast.success("Budget created!");
-    } catch (e) {
+    } catch (error: unknown) {
+      console.error(error);
       throw new Error("There was a problem creating your budget.");
     }
   }

@@ -115,6 +115,35 @@
     content: none;
   }
 
+  progress {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    width: 100%;
+    height: var(--space-sm);
+    border-radius: 100vmax;
+    overflow: hidden;
+    -webkit-transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+    -o-transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+
+  progress[value]::-webkit-progress-bar {
+    background-color: hsl(var(--light));
+  }
+
+  progress[value]::-moz-progress-bar {
+    -moz-transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+    background-color: hsl(var(--backdrop));
+  }
+
+  progress[value]::-webkit-progress-value {
+    background-color: hsl(var(--backdrop));
+    -webkit-transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+
   :where(a, .btn) {
     --color: hsl(var(--text));
     --backdrop: hsl(var(--accent));
@@ -329,6 +358,63 @@
       -ms-flex-wrap: wrap;
       flex-wrap: wrap;
     }
+  }
+  .budgets {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+  }
+
+  .budget {
+    --backdrop: var(--accent);
+    display: -ms-grid;
+    display: grid;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 32.2%;
+    flex: 1 1 32.2%;
+    max-width: 600px;
+    -webkit-box-shadow: 0.25em 0.3em 1em hsl(var(--muted) / 0.2);
+    box-shadow: 0.25em 0.3em 1em hsl(var(--muted) / 0.2);
+    background-color: var(--bkg);
+    border-radius: var(--round-lg);
+    border: 3px solid hsl(var(--backdrop));
+    padding: calc(var(--space-md) / 1.5) calc(var(--space-md) / 1.2);
+    gap: var(--space-sm);
+    text-decoration: none;
+    color: hsl(var(--backdrop));
+  }
+
+  .budget > .flex-sm {
+    padding-top: var(--space-sm);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+  .progress-text {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    gap: var(--space-lg);
+  }
+
+  .progress-text :nth-child(2) {
+    text-align: right;
+  }
+
+  .progress-text:nth-of-type(2) :nth-child(2) {
+    color: hsl(var(--muted));
   }
 }
 
