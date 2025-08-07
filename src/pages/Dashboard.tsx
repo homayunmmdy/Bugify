@@ -1,7 +1,12 @@
+import { useLoaderData } from "react-router-dom";
 import Intro from "../components/Intro";
 
+
 const DashboardPage = () => {
-  return <Intro />;
+  const { userName } = useLoaderData();
+  return (
+    <>{userName ? <div className="dashboard">Dashboard</div> : <Intro />}</>
+  );
 };
 
 export default DashboardPage;
