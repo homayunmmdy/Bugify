@@ -1,4 +1,4 @@
-import type { BudgetType } from "./types";
+import type { BudgetType, ExpenseType } from "./types";
 
 export const wait = () =>
   new Promise((res) => setTimeout(res, Math.random() * 800));
@@ -83,4 +83,24 @@ export const getAllMatchingItems = ({ category, key, value }: {category : string
   const data = fetchData(category) ?? [];
   return data.filter((item) => item[key] === value);
 };
+
+// create expense
+export const createExpense = ({ name, amount, budgetId } : ExpenseType) => {
+  const newItem = {
+    id: crypto.randomUUID(),
+    name: name,
+    createdAt: Date.now(),
+    amount: +amount,
+    budgetId: budgetId,
+  };
+  const existingExpenses = fetchData("expenses") ?? [];
+  return localStorage.setItem(
+    "expenses",
+    JSON.stringify([...existingExpenses, newItem])
+  );
+};
+
+// FORMATTING
+export const formatDateToLocaleString = (epoch : string) =>
+  new Date(epoch).toLocaleDateString();
 

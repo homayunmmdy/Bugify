@@ -1,12 +1,14 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import AddBudgetForm from "../components/AddBudgetForm";
-import Intro from "../components/Intro";
-import "./Dashboard.scss";
 import BudgetItem from "../components/BudgetItem";
+import Intro from "../components/Intro";
 import type { BudgetType } from "../types";
+import "./Dashboard.scss";
+import Table from "../components/Table";
+import AddExpenseForm from "../components/AddExpenseForm";
 
 const DashboardPage = () => {
-  const { userName, budgets } = useLoaderData();
+  const { expenses, userName, budgets } = useLoaderData();
   return (
     <>
       {userName ? (
@@ -19,6 +21,7 @@ const DashboardPage = () => {
               <div className="grid-lg">
                 <div className="flex-lg">
                   <AddBudgetForm />
+                  <AddExpenseForm budgets={budgets} />
                 </div>
                 <h2>Existing Budgets</h2>
                 <div className="budgets">
@@ -26,6 +29,21 @@ const DashboardPage = () => {
                     <BudgetItem key={budget.id} budget={budget} />
                   ))}
                 </div>
+                {expenses && expenses.length > 0 && (
+                  <div className="grid-md">
+                    <h2>Recent Expenses</h2>
+                    <Table
+                      expenses={expenses
+                        .sort((a, b) => b.createdAt - a.createdAt)
+                        .slice(0, 8)}
+                    />
+                    {expenses.length > 8 && (
+                      <Link to="expenses" className="btn btn--dark">
+                        View all expenses
+                      </Link>
+                    )}
+                  </div>
+                )}
               </div>
             ) : (
               <div className="grid-sm">

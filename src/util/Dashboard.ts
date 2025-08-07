@@ -1,5 +1,11 @@
 import toast from "react-hot-toast";
-import { createBudget, fetchData, wait } from "../helper";
+import {
+  createBudget,
+  createExpense,
+  deleteItem,
+  fetchData,
+  wait,
+} from "../helper";
 
 // loader
 export function dashboardLoader() {
@@ -36,6 +42,33 @@ export async function dashboardAction({ request }: { request: Request }) {
     } catch (error: unknown) {
       console.error(error);
       throw new Error("There was a problem creating your budget.");
+    }
+  }
+
+  if (_action === "createExpense") {
+    try {
+      createExpense({
+        name: values.newExpense,
+        amount: values.newExpenseAmount,
+        budgetId: values.newExpenseBudget,
+      });
+      return toast.success(`Expense ${values.newExpense} created!`);
+    } catch (error: unknown) {
+      console.error(error);
+      throw new Error("There was a problem creating your expense.");
+    }
+  }
+
+  if (_action === "deleteExpense") {
+    try {
+      deleteItem({
+        key: "expenses",
+        id: values.expenseId,
+      });
+      return toast.success("Expense deleted!");
+    } catch (error: unknown) {
+      console.error(error);
+      throw new Error("There was a problem deleting your expense.");
     }
   }
 }
