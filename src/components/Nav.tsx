@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { BiTrash } from "react-icons/bi";
 import { Form, NavLink } from "react-router-dom";
-import "./nav.scss";
+import "./Nav.scss";
 
 const Nav = ({ userName }: { userName: ReactNode }) => {
   return (
