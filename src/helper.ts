@@ -34,29 +34,41 @@ export const deleteItem = ({ key, id } : {key : string , id?: unknown}) => {
 };
 
 // create budget
-export const createBudget = ({ name, amount }: {name : FormDataEntryValue, amount : FormDataEntryValue}) => {
-  const newItem = {
+export const createBudget = ({ name, amount }: {name : FormDataEntryValue, amount : FormDataEntryValue}): boolean => {
+  const existingBudgets = fetchData<BudgetType[]>("budgets") ?? [];
+  
+  // Check if budget name already exists (case-insensitive)
+  const budgetNameExists = existingBudgets.some(
+    (budget) => budget.name.toString().toLowerCase().trim() === name.toString().toLowerCase().trim()
+  );
+  
+  if (budgetNameExists) {
+    return false;
+  }
+  
+  const newItem: BudgetType = {
     id: crypto.randomUUID(),
-    name: name,
+    name: name.toString().trim(),
     createdAt: Date.now(),
-    amount: +amount,
+    amount: Number(amount),
     color: generateRandomColor(),
   };
-  const existingBudgets = fetchData("budgets") ?? [];
-  return localStorage.setItem(
+  
+  localStorage.setItem(
     "budgets",
-    // @ts-ignore
     JSON.stringify([...existingBudgets, newItem])
   );
+  
+  return true;
 };
 
 
 
 // total spent by budget
 export const calculateSpentByBudget = (budgetId: string) => {
-  const expenses: BudgetType[] = fetchData("expenses") ?? [];
-  const budgetSpent = expenses.reduce((acc : number, expense: BudgetType) => {
-    // check if expense.id === budgetId I passed in
+  const expenses = fetchData<ExpenseType[]>("expenses") ?? [];
+  const budgetSpent = expenses.reduce((acc : number, expense: ExpenseType) => {
+    // check if expense.budgetId === budgetId I passed in
     if (expense.budgetId !== budgetId) return acc;
 
     // add the current amount to my total
@@ -82,25 +94,23 @@ export const formatPercentage = (amt: number) => {
 };
 
 // Get all items from local storage
-export const getAllMatchingItems = ({ category, key, value }: {category : string , key : string , value : string}) => {
-  const data = fetchData(category) ?? [];
-  // @ts-ignore
+export const getAllMatchingItems = <T extends Record<string, unknown>>({ category, key, value }: {category : string , key : string , value : string}): T[] => {
+  const data = fetchData<T[]>(category) ?? [];
   return data.filter((item) => item[key] === value);
 };
 
 // create expense
-export const createExpense = ({ name, amount, budgetId } : ExpenseType) => {
-  const newItem = {
+export const createExpense = ({ name, amount, budgetId }: {name: FormDataEntryValue, amount: FormDataEntryValue, budgetId: FormDataEntryValue}) => {
+  const newItem: ExpenseType = {
     id: crypto.randomUUID(),
-    name: name,
+    name: name.toString().trim(),
     createdAt: Date.now(),
-    amount: +amount,
-    budgetId: budgetId,
+    amount: Number(amount),
+    budgetId: budgetId.toString(),
   };
-  const existingExpenses = fetchData("expenses") ?? [];
+  const existingExpenses = fetchData<ExpenseType[]>("expenses") ?? [];
   return localStorage.setItem(
     "expenses",
-    // @ts-ignore
     JSON.stringify([...existingExpenses, newItem])
   );
 };
