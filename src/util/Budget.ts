@@ -1,22 +1,24 @@
 import toast from "react-hot-toast";
 import { createExpense, deleteItem, getAllMatchingItems } from "../helper";
+import type { BudgetType, ExpenseType } from "../types";
 
 // @ts-ignore
 export async function budgetLoader({ params }) {
-  const budget = await getAllMatchingItems({
+  const budgets = await getAllMatchingItems<BudgetType>({
     category: "budgets",
     key: "id",
     value: params.id,
-  })[0];
+  });
+  const budget = budgets[0];
 
-  const expenses = await getAllMatchingItems({
+  const expenses = await getAllMatchingItems<ExpenseType>({
     category: "expenses",
     key: "budgetId",
     value: params.id,
   });
 
   if (!budget) {
-    throw new Error("The budget you’re trying to find doesn’t exist");
+    throw new Error("The budget you're trying to find doesn't exist");
   }
 
   return { budget, expenses };
