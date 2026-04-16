@@ -41,7 +41,8 @@ export async function dashboardAction({ request }: { request: Request }) {
       return toast.success("Budget created!");
     } catch (error: unknown) {
       console.error(error);
-      throw new Error("There was a problem creating your budget.");
+      const errorMessage = error instanceof Error ? error.message : "There was a problem creating your budget.";
+      return toast.error(errorMessage);
     }
   }
 

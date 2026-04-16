@@ -35,6 +35,14 @@ export const deleteItem = ({ key, id } : {key : string , id?: unknown}) => {
 
 // create budget
 export const createBudget = ({ name, amount }: {name : FormDataEntryValue, amount : FormDataEntryValue}) => {
+  const existingBudgets = fetchData("budgets") ?? [];
+  
+  // @ts-ignore
+  const duplicateBudget = existingBudgets.find((budget) => budget.name === name);
+  if (duplicateBudget) {
+    throw new Error("预算名称已存在，请使用不同的名称。");
+  }
+
   const newItem = {
     id: crypto.randomUUID(),
     name: name,
@@ -42,7 +50,6 @@ export const createBudget = ({ name, amount }: {name : FormDataEntryValue, amoun
     amount: +amount,
     color: generateRandomColor(),
   };
-  const existingBudgets = fetchData("budgets") ?? [];
   return localStorage.setItem(
     "budgets",
     // @ts-ignore
