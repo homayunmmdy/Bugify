@@ -1,5 +1,6 @@
 import toast from "react-hot-toast";
 import {
+  checkBudgetNameExists,
   createBudget,
   createExpense,
   deleteItem,
@@ -34,6 +35,12 @@ export async function dashboardAction({ request }: { request: Request }) {
 
   if (_action === "createBudget") {
     try {
+      // ===== 修复：添加预算名称唯一性校验 =====
+      const budgetName = String(values.newBudget).trim();
+      if (checkBudgetNameExists(budgetName)) {
+        return toast.error(`Budget "${budgetName}" already exists!`);
+      }
+      // ===== 修复结束 =====
       createBudget({
         name: values.newBudget,
         amount: values.newBudgetAmount,

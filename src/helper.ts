@@ -33,6 +33,14 @@ export const deleteItem = ({ key, id } : {key : string , id?: unknown}) => {
   return localStorage.removeItem(key);
 };
 
+// check if budget name exists
+export const checkBudgetNameExists = (name: string): boolean => {
+  const existingBudgets: BudgetType[] = fetchData("budgets") ?? [];
+  return existingBudgets.some(
+    (budget) => budget.name.toLowerCase() === name.toLowerCase()
+  );
+};
+
 // create budget
 export const createBudget = ({ name, amount }: {name : FormDataEntryValue, amount : FormDataEntryValue}) => {
   const newItem = {
