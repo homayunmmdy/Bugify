@@ -4,6 +4,7 @@ export type BudgetType = {
   budgetId: string;
   amount: number;
   color: string;
+  createdAt?: number;
 };
 
 export type ExpenseType = {
